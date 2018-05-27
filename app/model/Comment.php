@@ -15,6 +15,18 @@ class Comment extends BaseModel
     public $date = "";
 
 
+    
+    function getId() {
+        return $this->id;
+    }
+    
+    function setId($id) {
+        $this->id = $id;
+    }
+    
+    
+    function get
+    
     /**
      * @return string
      */
@@ -48,23 +60,4 @@ class Comment extends BaseModel
         
     }
 
-    /**
-     * @param int $id
-     * @return mixed
-     */
-    function getComment($id)
-    {
-    
-        $sql = "SELECT comment,  User.name, settings FROM Comment, User WHERE Comment.user_id=User.id and Comment.content_id=:id order by Comment.id desc";
-
-        $stmt = $this->dbh->prepare($sql);
-
-        $stmt->bindValue(':id', $id, \PDO::PARAM_INT);
-
-        $stmt->execute();
-
-        $obj = $stmt->fetchALL(\PDO::FETCH_CLASS, get_class($this));
-
-        return $obj;
-    }
 }
